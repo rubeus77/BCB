@@ -20,7 +20,7 @@ class CreateCardStatusesTable extends Migration
             $table->bigInteger('print_status');
             $table->timestamps();
 
-            $table->foreign('print_status')->references('id')->on('print_statuses');
+            // $table->foreign('print_status')->references('id')->on('print_statuses');
         });
     }
 

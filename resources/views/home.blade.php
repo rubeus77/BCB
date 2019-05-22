@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<!-- TODO: zmienić kontent na właściwy z listą członków -->
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
