@@ -23,7 +23,7 @@ class CreateMemberStatusesTable extends Migration
             $table->string('leave_reason_scan_URL'); //skan przyczyn odejścia
             $table->timestamps();
 
-            $table->foreign('status_type')->references('id')->on('status_types');
+            // $table->foreign('status_type')->references('id')->on('status_types');
         });
     }
 

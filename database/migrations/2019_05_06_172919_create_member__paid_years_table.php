@@ -18,8 +18,8 @@ class CreateMemberPaidYearsTable extends Migration
             $table->bigInteger('paidyear_id');
             $table->timestamps();
 
-            $table->foreign('member_id')->references('id')->on('members');;
-            $table->foreign('paidyear_id')->references('id')->on('paid_years');;
+            // $table->foreign('member_id')->references('id')->on('members');;
+            // $table->foreign('paidyear_id')->references('id')->on('paid_years');;
         });
     }
 

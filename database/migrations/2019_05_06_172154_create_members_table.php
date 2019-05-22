@@ -30,10 +30,10 @@ class CreateMembersTable extends Migration
             $table->bigInteger('card_status');
             $table->timestamps();
 
-            $table->foreign('address')->references('id')->on('addresses');
-            $table->foreign('mail_address')->references('id')->on('addresses');
-            $table->foreign('member_status')->references('id')->on('member_statuses');
-            $table->foreign('card_status')->references('id')->on('card_statuses');
+            // $table->foreign('address')->references('id')->on('addresses');
+            // $table->foreign('mail_address')->references('id')->on('addresses');
+            // $table->foreign('member_status')->references('id')->on('member_statuses');
+            // $table->foreign('card_status')->references('id')->on('card_statuses');
         });
     }
 
