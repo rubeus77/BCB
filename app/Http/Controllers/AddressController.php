@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Member;
+use App\Address;
 
-class MemberController extends Controller
+class AddressController extends Controller
 {
 
     public function index()
     {
-        $members=Member::all();
-        return view('member.index', compact('members'));
+        $addresses=Address::all();
+        return view('address.index', compact('addresses'));
     }
 
     public function create()
     {
-        return view('member.create');
+        return view('address.create');
     }
 
     /**

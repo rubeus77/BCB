@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Member;
+use App\CardStatus;
 
-class MemberController extends Controller
+class CardStatusController extends Controller
 {
 
     public function index()
     {
-        $members=Member::all();
-        return view('member.index', compact('members'));
+        $card_statusses=CardStatus::all();
+        return view('cardstatus.index', compact('card_statusses'));
     }
 
     public function create()
     {
-        return view('member.create');
+        return view('cardstatus.create');
     }
 
     /**
