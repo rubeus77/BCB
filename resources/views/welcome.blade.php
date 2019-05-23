@@ -11,7 +11,6 @@
         <!-- UWAGA: asset - ustawia na katalog bierzący strony -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link href="style.css" rel="stylesheet"> <!--FIXME: tymczasowo dodany styl css, potem należy go przerzucić do "resources"-->
     </head>
     <body>
         <header>
