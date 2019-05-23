@@ -33,7 +33,7 @@
                 </ul>
             </nav>
         </header>
-        <section class="container" >
+        <section>
             <div>
                     <h1>Baza Danych Członków</h1>
                     <h1>Stowarzyszenia </h1>
