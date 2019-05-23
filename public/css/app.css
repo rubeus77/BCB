@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@charset "UTF-8";
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -10662,55 +10662,98 @@ a.text-dark:focus {
   }
 }
 
-html,
-body {
-  background-color: #fff;
-  color: #636b6f;
-  font-family: "Nunito", sans-serif;
-  font-weight: 200;
-  height: 100vh;
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.full-height {
-  height: 100vh;
+body {
+  background-color: antiquewhite;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.flex-center {
-  align-items: center;
+header {
+  width: 100%;
+  height: 20vh;
+  background-color: #633800;
   display: flex;
+  align-items: center;
+}
+
+nav {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav div.logo {
+  height: 100px;
+  width: 214px;
+  background-image: url(/images/bop-logo-czarna-lapa-bialy-napis.png?ab73e020d098d5ed5ee8ebfe22db9517);
+  background-size: cover;
+}
+
+nav ul.menu {
+  list-style: none;
+  display: flex;
+}
+
+ul.menu {
+  margin-right: 20px;
+}
+
+ul.menu li {
+  margin: 5px;
+}
+
+ul.menu li a {
+  text-decoration: none;
+  color: antiquewhite;
+  font-weight: bold;
+}
+
+.myButton {
+  box-shadow: inset 0px -1px 0px 0px #a6827e;
+  background: linear-gradient(to bottom, #7d5d3b 5%, #634b30 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#7d5d3b", endColorstr="#634b30",GradientType=0);
+  background-color: #7d5d3b;
+  border-radius: 12px;
+  border: 1px solid #54381e;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 20px;
+  padding: 10px 25px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #4d3534;
+}
+
+.myButton:hover {
+  background: linear-gradient(to bottom, #634b30 5%, #7d5d3b 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#634b30", endColorstr="#7d5d3b",GradientType=0);
+  background-color: #634b30;
+}
+
+.myButton:active {
+  position: relative;
+  top: 1px;
+}
+
+section {
+  background: black;
+  background: linear-gradient(0deg, black 0%, #555555 16%, white 33%, #ffe7b5 49%, #ffde58 66%, #d76300 83%, #633800 100%);
+  height: 80vh;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-.position-ref {
-  position: relative;
-}
-
-.top-right {
-  position: absolute;
-  right: 10px;
-  top: 18px;
-}
-
-.content {
+section h1 {
+  font-size: 48px;
   text-align: center;
-}
-
-.title {
-  font-size: 84px;
-}
-
-.links > a {
-  color: #636b6f;
-  padding: 0 25px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.1rem;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.m-b-md {
-  margin-bottom: 30px;
+  font-weight: bold;
 }
 

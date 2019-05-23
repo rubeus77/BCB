@@ -1,5 +1,3 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
 @import 'variables';
@@ -7,53 +5,107 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-html, body {
-    background-color: #fff;
-    color: #636b6f;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 200;
-    height: 100vh;
+
+$brown: darkgoldenrod;
+$yellow: sandybrown;
+$skin: antiquewhite;
+$gray: dimgray;
+$black: #040404;
+
+*{
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-.full-height {
-    height: 100vh;
+body{
+    background-color: $skin;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
-.flex-center {
-    align-items: center;
+header{
+    width: 100%;
+    height: 20vh;
+    background-color: rgba(99,56,0,1);
     display: flex;
+    align-items: center;
+}
+nav{
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    div.logo{
+        height: 100px;
+        width: 214px;
+        background-image: url('./bop-logo-czarna-lapa-bialy-napis.png');
+        background-size: cover;
+
+    }
+    ul.menu{
+        list-style: none;
+        display: flex;
+    }
+}
+ul.menu{
+    margin-right: 20px;
+    li{
+       margin: 5px;
+        a{
+            text-decoration: none;
+            color: $skin;
+            font-weight: bold;
+        }
+    }
+}
+.myButton {
+	-moz-box-shadow:inset 0px -1px 0px 0px #a6827e;
+	-webkit-box-shadow:inset 0px -1px 0px 0px #a6827e;
+	box-shadow:inset 0px -1px 0px 0px #a6827e;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7d5d3b), color-stop(1, #634b30));
+	background:-moz-linear-gradient(top, #7d5d3b 5%, #634b30 100%);
+	background:-webkit-linear-gradient(top, #7d5d3b 5%, #634b30 100%);
+	background:-o-linear-gradient(top, #7d5d3b 5%, #634b30 100%);
+	background:-ms-linear-gradient(top, #7d5d3b 5%, #634b30 100%);
+	background:linear-gradient(to bottom, #7d5d3b 5%, #634b30 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7d5d3b', endColorstr='#634b30',GradientType=0);
+	background-color:#7d5d3b;
+	-moz-border-radius:12px;
+	-webkit-border-radius:12px;
+	border-radius:12px;
+	border:1px solid #54381e;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	padding:10px 25px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #4d3534;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #634b30), color-stop(1, #7d5d3b));
+	background:-moz-linear-gradient(top, #634b30 5%, #7d5d3b 100%);
+	background:-webkit-linear-gradient(top, #634b30 5%, #7d5d3b 100%);
+	background:-o-linear-gradient(top, #634b30 5%, #7d5d3b 100%);
+	background:-ms-linear-gradient(top, #634b30 5%, #7d5d3b 100%);
+	background:linear-gradient(to bottom, #634b30 5%, #7d5d3b 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#634b30', endColorstr='#7d5d3b',GradientType=0);
+	background-color:#634b30;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+section{ 
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(85,85,85,1) 16%, rgba(255,255,255,1) 33%, rgba(255,231,181,1) 49%, rgba(255,222,88,1) 66%, rgba(215,99,0,1) 83%, rgba(99,56,0,1) 100%); 
+    height: 80vh;
+    display: flex;
+    align-items: center;
     justify-content: center;
-}
-
-.position-ref {
-    position: relative;
-}
-
-.top-right {
-    position: absolute;
-    right: 10px;
-    top: 18px;
-}
-
-.content {
+    // margin-top: 50px;
+    h1{
+    font-size: 48px;
     text-align: center;
-}
-
-.title {
-    font-size: 84px;
-}
-
-.links > a {
-    color: #636b6f;
-    padding: 0 25px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: .1rem;
-    text-decoration: none;
-    text-transform: uppercase;
-}
- 
-.m-b-md {
-    margin-bottom: 30px;
+    font-weight: bold;
+    }
 }
