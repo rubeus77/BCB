@@ -1,45 +1,46 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_','-',app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title>{{ config('app.name') }}</title>
+        <!-- tutaj - miejsce na linki do skryptów JS -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
+        <!-- tutaj - miejsce na ewentalne dodatkowe style css -->
+        <!-- UWAGA: asset - ustawia na katalog bierzący strony -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+        <link href="style.css" rel="stylesheet"> <!--FIXME: tymczasowo dodany styl css, potem należy go przerzucić do "resources"-->
     </head>
     <body>
-        <div class="container">
-            <div class="flex-center position-ref full-height">
-                @if (Route::has('login'))
-                    <div class="top-right links">
-                        @auth
-                            <a href="{{ url('/home') }}">Home</a>
-                        @else
-                            <a href="{{ route('login') }}">Login</a>
-                            <!-- ---wyłączona możliwość logowania -->
-                            
-                            <!-- @if (Route::has('register'))
-                                <a href="{{ route('register') }}">Register</a>
-                            @endif -->
-                        @endauth
-                    </div>
-                @endif
+        <header>
+            <nav class="container">
+                <div class="logo">
 
-                <div class="content">
-                    <div class="title">
-                        Baza Członków 
-                    </div>
-                    <div class="title">
-                    Bears of Poland
-                    </div>
                 </div>
+                <ul class="menu">
+                    @if (Route::has('login'))
+                        @auth
+                        <li><a href="{{ url('/home') }}">Home</a></li>
+                        @else
+                            <li class="myButton"><a href="{{ route('login') }}">Zaloguj</a></li>
+                            <!-- FIXME: rejestracja - do późniejszego usunięcia -->
+                            @if (Route::has('register'))
+                                <li class="myButton"><a href="{{ route('register') }}">Zarejestruj</a> </li>
+                            @endif
+                        @endauth
+                    @endif
+                </ul>
+            </nav>
+        </header>
+        <section class="container" >
+            <div>
+                    <h1>Baza Danych Członków</h1>
+                    <h1>Stowarzyszenia </h1>
+                    <h1>Bears of Poland</h1>
             </div>
-        </div>
+            
+        </section>
     </body>
 </html>
