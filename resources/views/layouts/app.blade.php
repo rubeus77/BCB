@@ -23,24 +23,33 @@
                 <div class="logo">
 
                 </div>
-                <ul class="menu">
-                    @guest 
-                    <li class="myButton"><a href="{{ route('login') }}">{{ __('Zaloguj') }}</a></li>
-                    <!-- FIXME: w późniejszym czasie wyczyścić możliwość rejestrowania -->
-                    @if(Route::has('register'))
-                        <li class="myButton"><a href="{{ route('register') }}">{{ __('Zarejestruj')}}
-                    @endif
-                    @else
-                    <!-- FIXME: usupełnić odpowiednie drogi dla przycisków Członkowie i Płatności -->
-                    <li class="myButton"><a href="#">Członkowie</a></li>
-                    <li class="myButton"><a href="#">Płatności</a></li>
-                    <!-- <li class="myButton"><a href="{{ route('register') }}">{{ __('Zarejestruj')}}</a></li> -->
-                    <li class="myButton"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{__('Wyloguj')}}</a></li>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
-                        @csrf 
-                        </form>
-                    @endguest
-                </ul>
+
+                <ul class="menu"  >
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="myButton">
+                                <a class="" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            <!-- @if (Route::has('register'))
+                                <li class="myButton">
+                                    <a class="" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif -->
+                        @else
+                            <li class="myButton"><a href="#">Członkowie</a></li>
+                            <li class="myButton"><a href="#">Płatności</a></li>
+                            <li class="myButton">
+                                <a class="" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                        @endguest
+                    </ul>
             </nav>
         </header>
 
