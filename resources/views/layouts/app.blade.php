@@ -36,7 +36,7 @@
                                 </li>
                             @endif -->
                         @else
-                            <li class="myButton"><a href="#">Członkowie</a></li>
+                            <li class="myButton"><a href="{{ route('members')}}">Członkowie</a></li>
                             <li class="myButton"><a href="#">Płatności</a></li>
                             <li class="myButton">
                                 <a class="" href="{{ route('logout') }}"

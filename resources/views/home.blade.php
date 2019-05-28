@@ -1,23 +1,15 @@
 @extends('layouts.app')
-<!-- TODO: zmienić kontent na właściwy z listą członków -->
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+<div class="container main-page">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
+    <h1>Witaj {{ Auth::user()->name }} w bazie członków </h1>
+    <h2>Stowarzyszenia Bears of Poland</h2>
+    <h2>Krótka insturkcja obsługi<h2>
+    <p>Przycisk <span>Członkowie</span> służy do wyświetlenia listy członków będących z bazie danych </p>
+    <p>Przycisk <span>Płatności</span> służy do wyświetlenia list wpłat dokonanych przez członków na konto stowarzyszenia </p>
+    <p>Przycisk <span>Wyloguj</span> zamyka sesję i przenosi do strony głównej </p>
+    <p>Wszelkie uwagi dotyczące działania prosze kierować na e-mail: rubeus77(małpa)gmail(kropka)com</p>
 </div>
+
 @endsection

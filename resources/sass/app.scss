@@ -109,3 +109,19 @@ section{
     font-weight: bold;
     }
 }
+.main-page{
+    font-size: 18px;
+    text-align: center;
+    h2:last-child{
+        margin-top: 40px;
+    }
+    p{
+        text-align: left;
+        font-size: 14px;
+    }
+    span{
+        text-decoration: underline;
+        font-weight: bold;
+        color: #4d3534;
+    }
+}
