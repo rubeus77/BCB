@@ -36,8 +36,9 @@
                                 </li>
                             @endif -->
                         @else
-                            <li class="myButton"><a href="{{ route('members')}}">Członkowie</a></li>
-                            <li class="myButton"><a href="#">Płatności</a></li>
+                            <li class="myButton"><a href="{{ url('/home')}}">Home</a></li>
+                            <li class="myButton"><a href="{{ url('/members')}}">Członkowie</a></li>
+                            <li class="myButton"><a href="#" onclick="alert('Jeszcze nie zrobione');">Płatności</a></li>
                             <li class="myButton">
                                 <a class="" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

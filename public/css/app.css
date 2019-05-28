@@ -10662,6 +10662,38 @@ a.text-dark:focus {
   }
 }
 
+.members-search {
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.clearButton {
+  border: none;
+  background-color: transparent;
+}
+
+.form-part {
+  margin: 20px 0;
+  padding: 0 20px 20px 20px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  position: relative;
+}
+
+.form-part span {
+  position: relative;
+  left: 20px;
+  top: -14px;
+  padding: 0 15px;
+  background-color: white;
+}
+
 * {
   margin: 0;
   padding: 0;

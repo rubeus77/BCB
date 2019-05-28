@@ -11,12 +11,13 @@ class MemberController extends Controller
     public function index()
     {
         $members=Member::all();
-        return view('members', compact('members'));
+        // $card_status=   TODO: dokończyć zapytanie do bazy
+        return view('members.index', compact('members'));
     }
 
     public function create()
     {
-        return view('member.create');
+        return view('members.create');
     }
 
     /**

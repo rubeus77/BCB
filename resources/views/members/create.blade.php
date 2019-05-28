@@ -1,27 +1,5 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <!-- TODO: Wywalić style do osobnego pliku - teraz są tylko tymczasowo -->
-        <style>
-            .form-part{
-                margin: 20px 0;
-                padding: 0 20px 20px 20px;
-                border-radius: 10px;
-                border: 1px solid gray;
-                position: relative;
-            }
-            .form-part span{
-                position: relative;
-                left: 20px;
-                top: -14px;
-                padding: 0 15px;
-                background-color: white;
-            }
-        </style>
-    </head>
-    <body>
+@extends('layouts.app')
+@section('content')
         <!-- TODO: ZE WZGLĘDU NA ILOŚĆ DANYCH ROZWAŻYĆ AKORDEON -->
         <form class="container">
             <div class="form-part">
@@ -149,3 +127,4 @@
         </form>
     </body>
 </html>
+@endsection
