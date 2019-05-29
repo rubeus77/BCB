@@ -53,9 +53,9 @@
                     <div class="form-group col">
                         <label for="statusType">Typ statusu</label>
                         <select id="statusType" class="form-control">
-                            <!-- TODO: opcje z bazy danych - może AJAX -->
-                            <option>1</option>
-                            <option>2</option>
+                            @foreach($members_statusses as $member_status)
+                                <option>{{$member_status->name}}</option>
+                            @endforeach  
                         </select>
                     </div>
                     <div class="form-group col-2">

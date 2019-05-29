@@ -50,6 +50,7 @@ nav{
 }
 ul.menu{
     margin-right: 20px;
+    position: relative;
     li{
        margin: 5px;
         a{
@@ -127,4 +128,8 @@ section{
         font-weight: bold;
         color: #4d3534;
     }
+}
+.menu-adds{
+    position: relative;
+    display: none;
 }

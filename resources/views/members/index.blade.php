@@ -8,16 +8,14 @@
         <div class="search row">
             <div class="form-group col-2">
                 <label for="addMember"></label>
-                <button id="addMember" class="clearButton"><a href="{{url('/create_member')}}" class="btn btn-primary">Dodaj członka</a></button>
+                <button id="addMember" class="clearButton"><a href="{{url('/members/create')}}" class="btn btn-primary">Dodaj członka</a></button>
             </div>
             <div class="form-group col-3">
                 <label for="cardStatus">Status Członka</label>
                 <select type="number" class="form-control" id="cardStatus">
-                    <!-- TODO: opcje z bazy danych - może AJAX -->
-                    <option>euifgqei rfiqefieh ger</option>
-                    <option>euifgqei </option>
-                    <option>euifgqei rfdfs hhstr htrhfieh ger</option>
-                    <option>euifgqei rfifgshzsfaw we rwera rdg fieh ger</option>
+                    @foreach($members_statusses as $member_status)
+                        <option>{{$member_status->name}}</option>
+                    @endforeach  
                 </select>
             </div>
             <div class="form-group col-3">

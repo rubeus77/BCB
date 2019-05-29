@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Member;
+use App\StatusType;
 
 class MemberController extends Controller
 {
@@ -11,13 +12,14 @@ class MemberController extends Controller
     public function index()
     {
         $members=Member::all();
-        // $card_status=   TODO: dokończyć zapytanie do bazy
-        return view('members.index', compact('members'));
+        $members_statusses=StatusType::all(); 
+        return view('members.index', compact(['members', 'members_statusses']));
     }
 
     public function create()
     {
-        return view('members.create');
+        $members_statusses=StatusType::all(); 
+        return view('members.create', compact(['members_statusses']));
     }
 
     /**
