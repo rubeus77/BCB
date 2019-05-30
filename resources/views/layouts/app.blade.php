@@ -43,7 +43,7 @@
                                 <ul class="menu-adds">
                                 <!-- TODO:  uzupełnić linki -->
                                     <li class="myButton"><a href="{{ url('/members/create')}}">Członka</li>
-                                    <li class="myButton"><a href="#">Status karty</li>
+                                    <li class="myButton"><a href="{{ url('/statusType')}}">Status karty</li>
                                     <li class="myButton"><a href="#">Status członka</li>
                                     <li class="myButton"><a href="#">Adres</li>
                                 </ul>

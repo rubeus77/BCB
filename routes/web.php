@@ -22,3 +22,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/members', 'MemberController');
 //Route::get('/create_member', 'MemberController@create');
 Route::resource('/address','AddressController');
+Route::resource('/statusType', 'StatusTypeController');

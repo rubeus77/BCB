@@ -15,7 +15,7 @@ class StatusTypeController extends Controller
     public function index()
     {
         $status_types=StatusType::all();
-        return view('statusType', compact('status_types'));
+        return view('statusType.index', compact('status_types'));
     }
 
     /**
@@ -25,7 +25,7 @@ class StatusTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('statusType.create');
     }
 
     /**
@@ -36,7 +36,17 @@ class StatusTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $request->validate([
+            'status_type'=>'required'
+        ]);
+
+        $status_type = new StatusType([
+            'name' => $request->get('status_type')
+        ]);
+        $status_type->save();
+        // return redirect('statusType.index')->with('success', 'Nowy typ statusu członka dodany!');
+        return redirect('statusType')->with('success', 'Nowy typ statusu członka dodany!');
     }
 
     /**
@@ -58,7 +68,8 @@ class StatusTypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $status = StatusType::find($id);
+        return view('statusType.edit', compact('status')); 
     }
 
     /**
@@ -70,7 +81,14 @@ class StatusTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'status_type'=>'required'
+        ]);
+
+        $status_type = StatusType::find($id);
+        $status_type->name = $request->get('status_type');
+        $status_type->save();
+        return redirect('statusType')->with('success', 'Uaktualniono nazwę statusu członka!');
     }
 
     /**
@@ -81,6 +99,9 @@ class StatusTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $status = StatusType::find($id);
+        $status->delete();
+
+        return redirect('/statusType')->with('success', 'Status usunięty');
     }
 }
