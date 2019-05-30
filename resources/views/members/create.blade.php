@@ -61,7 +61,7 @@
                     <div class="form-group col-2">
                         <label for="addStatusBtn">Dodaj status</label>
                         <input type="button" class="form-control btn btn-primary" id="addStatusBtn" value="Dodaj" />
-                        <!-- TODO: dodać obsługę przycisku - dodanie nowego statusu i odświeżenie przez AJAX -->
+                        <!-- TODO: dodać obsługę przycisku - dodanie nowego statusu i odświeżenie przez AJAX - modal z ajaxem -->
                     </div>
                     <div class="form-group col">
                         <label for="enterDate">Data wstąpienia</label>
@@ -109,11 +109,9 @@
                     <div class="form-group col-3">
                         <label for="cardStatus">Status karty</label>
                         <select type="number" class="form-control" id="cardStatus">
-                            <!-- TODO: opcje z bazy danych - może AJAX -->
-                            <option>euifgqei rfiqefieh ger</option>
-                            <option>euifgqei </option>
-                            <option>euifgqei rfdfs hhstr htrhfieh ger</option>
-                            <option>euifgqei rfifgshzsfaw we rwera rdg fieh ger</option>
+                            @foreach($print_statusses as $print_status)
+                                <option>{{$print_status->name}}</option>
+                            @endforeach 
                         </select>
                     </div>
                     <div class="form-group col-2">
