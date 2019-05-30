@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\PrintStatus;
 
 class PrintStatusController extends Controller
 {
@@ -13,7 +14,8 @@ class PrintStatusController extends Controller
      */
     public function index()
     {
-        //
+        $print_statusses=PrintStatus::all();
+       return view('printStatus.index', compact('print_statusses'));
     }
 
     /**
@@ -23,7 +25,7 @@ class PrintStatusController extends Controller
      */
     public function create()
     {
-        //
+        return view('printStatus.create');
     }
 
     /**
@@ -34,7 +36,15 @@ class PrintStatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(['print_status'=>'required']);
+        
+        $print_status= new PrintStatus([
+            'name'=>$request->get('print_status')
+        ]);
+        $print_status->save();
+
+        return redirect('printStatus')->with('success', 'Nowy status druku/wydania karty dodany!');
+
     }
 
     /**
@@ -56,7 +66,8 @@ class PrintStatusController extends Controller
      */
     public function edit($id)
     {
-        //
+        $status = PrintStatus::find($id);
+        return view('printStatus.edit', compact('status')); 
     }
 
     /**
@@ -68,7 +79,15 @@ class PrintStatusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'print_status'=>'required'
+        ]);
+        $print_status= PrintStatus::find($id);
+        $print_status->name = $request->get('print_status');
+        $print_status->save();
+
+        return redirect('printStatus')->with('success', 'Pozytywnie zmieniono nazwę statysy karty');
+
     }
 
     /**
@@ -79,6 +98,9 @@ class PrintStatusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $status = PrintStatus::find($id);
+        $status->delete();
+
+        return redirect('printStatus')->with('success', 'Status usunięty');
     }
 }
