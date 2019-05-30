@@ -30,3 +30,14 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+
+//mój kod dla strony
+$(()=>{
+    const addBtn=$('#addBtn');
+    const dropMenu=$(".menu-adds");
+
+    addBtn.on("click", (e)=>{
+        e.preventDefault();
+        dropMenu.toggle();
+    })
+})

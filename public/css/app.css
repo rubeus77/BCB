@@ -10734,7 +10734,6 @@ nav ul.menu {
 
 ul.menu {
   margin-right: 20px;
-  position: relative;
 }
 
 ul.menu li {
@@ -10745,6 +10744,10 @@ ul.menu li a {
   text-decoration: none;
   color: antiquewhite;
   font-weight: bold;
+}
+
+ul.menu li:nth-child(4) {
+  position: relative;
 }
 
 .myButton {
@@ -10811,7 +10814,16 @@ section h1 {
 }
 
 .menu-adds {
-  position: relative;
+  z-index: 1;
+  margin: 0;
+  top: 100px;
+  left: 550px;
+  position: absolute;
+  width: 210px;
   display: none;
+}
+
+.menu-adds li {
+  margin: 0;
 }
 

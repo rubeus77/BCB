@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Member;
 use App\StatusType;
+use App\PrintStatus;
 
 class MemberController extends Controller
 {
@@ -13,13 +14,15 @@ class MemberController extends Controller
     {
         $members=Member::all();
         $members_statusses=StatusType::all(); 
-        return view('members.index', compact(['members', 'members_statusses']));
+        $print_statuses=PrintStatus::all();
+        return view('members.index', compact(['members', 'members_statusses', 'print_statuses']));
     }
 
     public function create()
     {
         $members_statusses=StatusType::all(); 
-        return view('members.create', compact(['members_statusses']));
+        $print_statuses=PrintStatus::all();
+        return view('members.create', compact(['members_statusses', 'print_statuses']));
     }
 
     /**
