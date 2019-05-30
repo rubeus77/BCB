@@ -54,7 +54,7 @@
                         <label for="statusType">Typ statusu</label>
                         <select id="statusType" class="form-control">
                             @foreach($members_statusses as $member_status)
-                                <option>{{$member_status->name}}</option>
+                                <option value="{{ $member_status->id }}">{{$member_status->name}}</option>
                             @endforeach  
                         </select>
                     </div>
@@ -108,9 +108,9 @@
                         </div>
                     <div class="form-group col-3">
                         <label for="cardStatus">Status karty</label>
-                        <select type="number" class="form-control" id="cardStatus">
+                        <select type="number" class="form-control" id="cardStatus" name="cardStatus">
                             @foreach($print_statusses as $print_status)
-                                <option>{{$print_status->name}}</option>
+                                <option value="{{$print_status->id}}">{{$print_status->name}}</option>
                             @endforeach 
                         </select>
                     </div>
