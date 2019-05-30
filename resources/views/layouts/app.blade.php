@@ -39,10 +39,10 @@
                             <li class="myButton"><a href="{{ url('/home')}}">Home</a></li>
                             <li class="myButton"><a href="{{ url('/members')}}">Członkowie</a></li>
                             <li class="myButton"><a href="#" onclick="alert('Jeszcze nie zrobione');">Płatności</a></li>
-                            <li class="myButton">Dodaj</li>
+                            <li class="myButton" id="addBtn">Dodaj</li>
                                 <ul class="menu-adds">
                                 <!-- TODO: zrobić rozwijane manu i uzupełnić linki -->
-                                    <li class="myButton"><a href="{{ url('member/create')}}">Członka</li>
+                                    <li class="myButton"><a href="{{ url('/members/create')}}">Członka</li>
                                     <li class="myButton"><a href="#">Status karty</li>
                                     <li class="myButton"><a href="#">Status członka</li>
                                     <li class="myButton"><a href="#">Adres</li>

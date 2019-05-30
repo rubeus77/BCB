@@ -49288,6 +49288,15 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 var app = new Vue({
   el: '#app'
+}); //mój kod dla strony
+
+$(function () {
+  var addBtn = $('#addBtn');
+  var dropMenu = $(".menu-adds");
+  addBtn.on("click", function (e) {
+    e.preventDefault();
+    dropMenu.toggle();
+  });
 });
 
 /***/ }),
