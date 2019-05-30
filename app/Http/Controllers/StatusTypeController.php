@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\StatusType;
 
 class StatusTypeController extends Controller
 {
@@ -13,7 +14,8 @@ class StatusTypeController extends Controller
      */
     public function index()
     {
-        //
+        $status_types=StatusType::all();
+        return view('statusType', compact('status_types'));
     }
 
     /**
