@@ -19,7 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/members', 'MemberController');
-Route::resource('/address','AddressController');
-Route::resource('/statusType', 'StatusTypeController');
-Route::resource('/printStatus', 'PrintStatusController');
+Route::resources([
+    '/members'=> 'MemberController',
+    '/address'=>'AddressController',
+    '/statusType'=> 'StatusTypeController',
+    '/printStatus'=> 'PrintStatusController'
+    ]);

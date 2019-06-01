@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Address;
 
@@ -10,7 +11,7 @@ class AddressController extends Controller
 
     public function index()
     {
-        $addresses=Address::all();
+        $addresses=DB::table('addresses')->orderBy('city', 'desc')->get();
         return view('address.index', compact('addresses'));
     }
 
@@ -27,7 +28,23 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'line1'=>'required',
+            'city'=>'required',
+            'post_code'=>'required',
+            'country'=>'required'
+        ]);
+
+        $address= new Address([
+            'line1'=>$request->get('line1'),
+            'line2'=>$request->get('line2'),
+            'city'=>$request->get('city'),
+            'post_code'=>$request->get('post_code'),
+            'coutry'=>$request->get('country')
+        ]);
+        
+        $address->save();
+        return redirect('/address')->with('success', 'Pomyślnie dodano nowy adres.');
     }
 
     /**
@@ -49,7 +66,8 @@ class AddressController extends Controller
      */
     public function edit($id)
     {
-        //
+        $address= Address::find($id);
+        return view('address.edit', compact('address'));
     }
 
     /**
@@ -61,7 +79,23 @@ class AddressController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'line1'=>'required',
+            'city'=>'required',
+            'post_code'=>'required',
+            'country'=>'required'
+        ]);
+
+        $address = Address::find($id);
+        $address->line1 = $request->get('line1');
+        $address->line2 = $request->get('line2');
+        $address->city = $request->get('city');
+        $address->post_code = $request->get('post_code');
+        $address->coutry = $request->get('country');
+    
+        
+        $address->save();
+        return redirect('/address')->with('success', 'Pomyślnie zaaktualizowano adres.');
     }
 
     /**
@@ -72,6 +106,9 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $address=Address::find($id);
+        $address->delete();
+
+        return redirect('address')->with('success', 'Adres usunięty');
     }
 }

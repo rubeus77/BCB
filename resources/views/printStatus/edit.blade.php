@@ -18,7 +18,7 @@
             @csrf
             @method('PATCH')
             <input type="text" class="form-control" name="print_status" id="print_status" value="{{ $status->name }}"/>
-            <button type="submit" class="btn btn-primary">Dodaj</button>
+            <button type="submit" class="btn btn-primary">Aktualizuj</button>
         </form>
 </div>
 @endsection
