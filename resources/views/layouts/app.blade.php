@@ -45,7 +45,7 @@
                                     <li class="myButton"><a href="{{ url('/members/create')}}">Członka</li>
                                     <li class="myButton"><a href="{{ url('/statusType')}}">Status członka</li>
                                     <li class="myButton"><a href="{{ url('printStatus') }}">Status karty</li>
-                                    <li class="myButton"><a href="#">Adres</li>
+                                    <li class="myButton"><a href="{{ url('address')}}">Adres</li>
                                 </ul>
                             <li class="myButton">
                                 <a href="{{ route('logout') }}"
