@@ -13,20 +13,24 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
-        <header>
-            <nav class="container">
-                <div class="logo">
-
-                </div>
-                <ul class="menu">
+        <header class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="{{ asset('bop-logo-czarna-lapa-bialy-napis.png')}}" width="80" height="30" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
                     @if (Route::has('login'))
                         @auth
-                        <li><a href="{{ url('/home') }}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/home') }}">Home</a></li>
                         @else
-                            <li class="myButton"><a href="{{ route('login') }}">Zaloguj</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Zaloguj</a></li>
                             <!-- FIXME: rejestracja - do późniejszego usunięcia -->
                             @if (Route::has('register'))
-                                <li class="myButton"><a href="{{ route('register') }}">Zarejestruj</a> </li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Zarejestruj</a> </li>
                             @endif
                         @endauth
                     @endif
