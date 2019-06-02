@@ -41,6 +41,7 @@
                 <input type="text" class="form-control" id="country" name="country" placeholder="" />
             </div>
         </div>
+        <button type="submit" class="btn btn-primary">Dodaj</button>
     </form>
 </div>
 @endsection

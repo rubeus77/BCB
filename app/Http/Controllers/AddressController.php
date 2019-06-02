@@ -30,6 +30,7 @@ class AddressController extends Controller
     {
         $request->validate([
             'line1'=>'required',
+            'line2'=>'nullable',
             'city'=>'required',
             'post_code'=>'required',
             'country'=>'required'
@@ -37,10 +38,10 @@ class AddressController extends Controller
 
         $address= new Address([
             'line1'=>$request->get('line1'),
-            'line2'=>$request->get('line2'),
+            'line2'=>$request->get('line2', null),
             'city'=>$request->get('city'),
             'post_code'=>$request->get('post_code'),
-            'coutry'=>$request->get('country')
+            'country'=>$request->get('country')
         ]);
         
         $address->save();

@@ -26,7 +26,11 @@
                 <tr>
                     <td>{{$address->city}}</td>
                     <td>{{$address->post_code}}</td>
-                    <td>{{$address->line1}} <br /> {{$address->line2}}</td>
+                    <td>{{$address->line1}} 
+                    @if(!empty($address->line2))
+                    <br /> {{$address->line2}}
+                    @endif
+                    </td>
 
                     <td><a href="{{ route('address.edit', $address->id) }}" class="btn btn-success">Modyfikuj</a></td>
                     <td>

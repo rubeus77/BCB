@@ -15,6 +15,7 @@ class CreateMemberStatusesTable extends Migration
     {
         Schema::create('member_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id');
             $table->bigInteger('status_type');
             $table->date('accession_date'); //data wejścia
             $table->date('leave_date'); //data opuszczenia

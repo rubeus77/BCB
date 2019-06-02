@@ -15,6 +15,7 @@ class CreateCardStatusesTable extends Migration
     {
         Schema::create('card_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id');
             $table->string('first_name_on_card');
             $table->string('last_name_on_card');
             $table->bigInteger('print_status');

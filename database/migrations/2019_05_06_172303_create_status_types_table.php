@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\StatusType;
 
 class CreateStatusTypesTable extends Migration
 {
@@ -18,6 +19,29 @@ class CreateStatusTypesTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        //wstępne dane wpisywane do bazy
+        StatusType::create([
+            'name'=>'Z opłaconą składką'
+        ]);
+        StatusType::create([
+            'name'=> 'Bez opłaconej składki'
+        ]);
+        StatusType::create([
+            'name'=>'Zrezygnował'
+        ]);
+        StatusType::create([
+            'name'=>'Skreślony'
+        ]);
+        StatusType::create([
+            'name'=>'Zawieszony'
+        ]);
+        StatusType::create([
+            'name'=>'Honorowy'
+        ]);
+        StatusType::create([
+            'name'=>'Kandydat na członka'
+        ]);
     }
 
     /**

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\PrintStatus;
 
 class CreatePrintStatusesTable extends Migration
 {
@@ -18,6 +19,20 @@ class CreatePrintStatusesTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        //wstępne dane do bazy danych PrintStatus
+        PrintStatus::create([
+            'name'=>'Wydrukowana'
+        ]);
+        PrintStatus::create([
+            'name'=>'Wydana'
+        ]);
+        PrintStatus::create([
+            'name'=>'Do druku'
+        ]);
+        PrintStatus::create([
+            'name'=>'Nie drukować'
+        ]);
     }
 
     /**

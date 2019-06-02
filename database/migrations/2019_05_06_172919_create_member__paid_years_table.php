@@ -15,6 +15,7 @@ class CreateMemberPaidYearsTable extends Migration
     {
         Schema::create('member_paidyears', function (Blueprint $table) {
             $table->bigInteger('member_id');
+            $table->bigInteger('user_id');
             $table->bigInteger('paidyear_id');
             $table->timestamps();
 
