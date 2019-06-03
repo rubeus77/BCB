@@ -33,11 +33,20 @@ const app = new Vue({
 
 //mój kod dla strony
 $(()=>{
-    const addBtn=$('#addBtn');
-    const dropMenu=$(".menu-adds");
+    //blok obsługi akordeonu
+    // var acc = document.getElementsByClassName("accordion");
 
-    addBtn.on("click", (e)=>{
-        e.preventDefault();
-        dropMenu.toggle();
-    })
+    // for (let i = 0; i < acc.length; i++) {
+    // acc[i].addEventListener("click", function() {
+    //     this.classList.toggle("active");
+    //     var panel = this.nextElementSibling;
+    //     if (panel.style.maxHeight){
+    //     panel.style.maxHeight = null;
+    //     } else {
+    //     panel.style.maxHeight = panel.scrollHeight + "px";
+    //     } 
+    // });
+    // }
+
+
 })
