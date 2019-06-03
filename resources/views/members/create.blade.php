@@ -135,7 +135,7 @@
                 <div class="card-header" id="headingCardStatus">
                     <h5 class="mb-0">
                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#cardStatus" aria-expanded="false" aria-controls="cardStatus">
-                            Status Członka
+                            Status Karty
                         </button>
                     </h5>
                 </div>
