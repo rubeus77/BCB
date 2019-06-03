@@ -33,11 +33,12 @@
     <table class="table table-striped">
         <thead>
             <tr>
-              <td>Numer karty</td>
-              <td>Imię i nazwisko</td>
-              <td>Status członka</td>
-              <td>Status karty</td>
-              <td colspan="2">Działania</td>
+              <th>Numer karty</th>
+              <th>Imię i nazwisko</th>
+              <th>Status członka</th>
+              <th>Status karty</th>
+              <th colspan="2">Działania</th>
+              <th colspan="2">Płatności</th>
             </tr>
         </thead>
         <tbody>
@@ -48,16 +49,20 @@
             <td>Rafał Nowak</td>
             <td>Bez opłaconej składki</td>
             <td>Wydrukowana, nie wydana</td>
-            <td>Szczegóły</td>
-            <td>Edytuj</td>
+            <td> <a href="#" class="btn btn-outline-primary">Szczegóły</a></td>
+            <td> <a href="#" class="btn btn-outline-danger">Edytuj</a></td>
+            <td> <a href="#" class="btn btn-outline-success">Pokaż</a></td>
+            <td> <a href="#" class="btn btn-outline-dark">Dodaj</a></td>
         </tr>
         <tr>
             <td>76</td>
             <td>Rafał Pisarek</td>
             <td>Członek zarządu</td>
             <td>Wydana</td>
-            <td>Szczegóły</td>
-            <td>Edytuj</td>
+            <td> <a href="#" class="btn btn-outline-primary">Szczegóły</a></td>
+            <td> <a href="#" class="btn btn-outline-danger">Edytuj</a></td>
+            <td> <a href="#" class="btn btn-outline-success">Pokaż</a></td>
+            <td> <a href="#" class="btn btn-outline-dark">Dodaj</a></td>
         </tr>
             @foreach($members as $member)
             <tr>
@@ -65,11 +70,41 @@
                 <td>{{$member->first_name}} {{$member->last_name}}</td>
                 <td><!-- TODO: do zrobienia odczyt statusu członka--></td>
                 <td><!-- TODO: do zrobienia odczyt statusu karty --></td>
-                <td>Szczegóły</td>
-                <td>Edytuj</td>
+                <td> <a href="#" class="btn btn-outline-primary">Szczegóły</a></td>
+                <td> <a href="#" class="btn btn-outline-danger">Edytuj</a></td>
+                <td> <a href="#" class="btn btn-outline-success">Pokaż</a></td>
+                <td> <a href="#" class="btn btn-outline-dark">Dodaj</a></td>
             </tr>
             @endforeach
         </tbody>
     </table>
 </div> 
+<!-- modal blok -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Dane osobowe dla {{</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 @endsection
