@@ -6,16 +6,51 @@ use Illuminate\Http\Request;
 use App\Member;
 use App\StatusType;
 use App\PrintStatus;
+use App\MemberStatus;
 
 class MemberController extends Controller
 {
 
     public function index()
     {
-        $members=Member::all();
-        $members_statusses=StatusType::all(); 
-        $print_statusses=PrintStatus::all();
-        return view('members.index', compact(['members', 'members_statusses', 'print_statusses']));
+        //---- this was without DataTables ----
+        // $members=Member::all();
+        // $members_statusses=StatusType::all(); 
+        // $print_statusses=PrintStatus::all();
+        // return view('members.index', compact(['members', 'members_statusses', 'print_statusses']));
+
+        // ---- with DataTables
+        if (request()->ajax()){
+            $member_status="dupa";
+            $card_status="blada";
+            return datatables()->of(Member::select('card_number','first_name','last_name', 'id')->get())
+                ->addColumn('member_status',function($data1){
+                    $member_status=StatusType::where('id',$data1->id)->get();
+                    $member_status.=MemberStatus::where('id', $data1->id)->get();
+                    return $member_status;
+                })
+                //->addColumn('member_status', $member_status)
+                ->addColumn('card_status', $card_status)
+                ->addColumn('action', function($data){
+                    $button='<i class="fas fa-user edit_member_status" name="edit_member_status"  id="'.$data->id.'"></i>';
+                    $button.='&nbsp;';
+                    $button.='<i class="far fa-credit-card edit_card_status" name="edit_card_status" id="'.$data->id.'"></i>';
+                    $button.='&nbsp;&nbsp;';
+                    $button.='<i class="fas fa-user-edit edit_member" name="edit_member" id="'.$data->id.'"></i>';
+                    $button.='&nbsp;';
+                    $button.='<i class="far fa-id-card info_member" name="info_member" id="'.$data->id.'"></i>';
+                    $button.='&nbsp;&nbsp;';
+                    $button.='<i class="far fa-search-dollar payment_member" name="payment_member" id="'.$data->id.'"></i>';
+                    $button.='&nbsp;';
+                    $button.='<i class="far fa-hand-holding-usd payment_member_add" name="payment_member_add" id="'.$data->id.'"></i>';
+                    $button.="cuj".$data->id;
+                    return $button;
+                })
+                ->rawColumns(['member_status', 'card_status','action'])
+                ->make(true);
+        }
+
+        return view('members.index');
     }
 
     public function create()

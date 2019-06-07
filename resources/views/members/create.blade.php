@@ -134,13 +134,13 @@
             <div class="card">
                 <div class="card-header" id="headingCardStatus">
                     <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#cardStatus" aria-expanded="false" aria-controls="cardStatus">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#cardStatuss" aria-expanded="false" aria-controls="cardStatuss">
                             Status Karty
                         </button>
                     </h5>
                 </div>
             </div>
-            <div id="cardStatus" class="collapse" aria-labelledby="headingCardStatus" data-parent="#accordionMembers">
+            <div id="cardStatuss" class="collapse" aria-labelledby="headingCardStatus" data-parent="#accordionMembers">
                 <div class="card-body">
                     <div class="form-row">
                         <div class="form-group col-2">
