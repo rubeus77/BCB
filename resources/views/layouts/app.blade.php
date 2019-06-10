@@ -18,6 +18,8 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.1.4/js/dataTables.fixedHeader.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.js"></script>
+    <!-- awesome font -->
+    <script src="https://kit.fontawesome.com/82c7b4f0e9.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Styles -->

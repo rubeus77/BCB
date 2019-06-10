@@ -25,6 +25,11 @@ class MemberController extends Controller
             $card_status="blada";
             return datatables()->of(Member::select('card_number','first_name','last_name', 'id')->get())
                 ->addColumn('member_status',function($data1){
+                    
+                    // dokończyć
+                    $member_status_index="";
+
+
                     $member_status=StatusType::where('id',$data1->id)->get();
                     $member_status.=MemberStatus::where('id', $data1->id)->get();
                     return $member_status;
@@ -40,10 +45,10 @@ class MemberController extends Controller
                     $button.='&nbsp;';
                     $button.='<i class="far fa-id-card info_member" name="info_member" id="'.$data->id.'"></i>';
                     $button.='&nbsp;&nbsp;';
-                    $button.='<i class="far fa-search-dollar payment_member" name="payment_member" id="'.$data->id.'"></i>';
+                    $button.='<i class="fas fa-search-dollar payment_member" name="payment_member" id="'.$data->id.'"></i>';
                     $button.='&nbsp;';
-                    $button.='<i class="far fa-hand-holding-usd payment_member_add" name="payment_member_add" id="'.$data->id.'"></i>';
-                    $button.="cuj".$data->id;
+                    $button.='<i class="fas fa-hand-holding-usd payment_member_add" name="payment_member_add" id="'.$data->id.'"></i>';
+                    $button.=$data->id;
                     return $button;
                 })
                 ->rawColumns(['member_status', 'card_status','action'])
