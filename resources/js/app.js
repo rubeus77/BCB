@@ -44,6 +44,7 @@ $(document).ready(function(){
         serverSide: true,
         ajax:{
             //FIXME: zastanowić się nad tą ścieżką dlaczego blade jej nie zamienia na poprawną
+            //chyba będzie najlepiej to zrobić przez pole ukryte i wyszukanie go już w JS. teraz nie jest route zamieniany na ścieżkę gdyż nie jest on częscią BLADE i jest parsowany przez normalny parser a nie parser związany z blade
             //url: "{{ route('members.index')}}",
             url:"/members"
         },
