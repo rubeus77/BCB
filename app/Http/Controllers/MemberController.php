@@ -30,6 +30,7 @@ class MemberController extends Controller
                 ->addColumn('card_status', function($data){
                     $card_status = CardStatus::where('id', $data->id)->get();
                     $card_status.="uzupełnić CardStatus";
+                    
                     return $card_status;
                 })
                 ->addColumn('action', function($data){
