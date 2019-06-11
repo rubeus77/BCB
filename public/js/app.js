@@ -1494,7 +1494,7 @@ module.exports = function spread(callback) {
 
 
 var bind = __webpack_require__(/*! ./helpers/bind */ "./node_modules/axios/lib/helpers/bind.js");
-var isBuffer = __webpack_require__(/*! is-buffer */ "./node_modules/is-buffer/index.js");
+var isBuffer = __webpack_require__(/*! is-buffer */ "./node_modules/axios/node_modules/is-buffer/index.js");
 
 /*global toString:true*/
 
@@ -1825,6 +1825,28 @@ module.exports = {
   extend: extend,
   trim: trim
 };
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/node_modules/is-buffer/index.js":
+/*!************************************************************!*\
+  !*** ./node_modules/axios/node_modules/is-buffer/index.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*!
+ * Determine if an object is a Buffer
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+
+module.exports = function isBuffer (obj) {
+  return obj != null && obj.constructor != null &&
+    typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
+}
 
 
 /***/ }),
@@ -21733,38 +21755,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 
 	return $.fn.dataTable;
 }));
-
-
-/***/ }),
-
-/***/ "./node_modules/is-buffer/index.js":
-/*!*****************************************!*\
-  !*** ./node_modules/is-buffer/index.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
- */
-
-// The _isBuffer check is for Safari 5-7 support, because it's missing
-// Object.prototype.constructor. Remove this eventually
-module.exports = function (obj) {
-  return obj != null && (isBuffer(obj) || isSlowBuffer(obj) || !!obj._isBuffer)
-}
-
-function isBuffer (obj) {
-  return !!obj.constructor && typeof obj.constructor.isBuffer === 'function' && obj.constructor.isBuffer(obj)
-}
-
-// For Node v0.10 support. Remove this eventually.
-function isSlowBuffer (obj) {
-  return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
-}
 
 
 /***/ }),
@@ -52402,43 +52392,83 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // window
 // });
 
 
-__webpack_require__(/*! datatables.net-bs4 */ "./node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"); // ---- place for additional code for pages ----
-
-
-$(document).ready(function () {
-  //find table in members view
-  var isTable = $('#members_table').attr('id');
-  console.log(isTable == undefined ? "tak" : "nie");
-  $('#members_table').DataTable({
-    processing: true,
-    serverSide: true,
-    ajax: {
-      //FIXME: zastanowić się nad tą ścieżką dlaczego blade jej nie zamienia na poprawną
-      //url: "{{ route('members.index')}}",
-      url: "/members"
-    },
-    columns: [{
-      data: 'card_number',
-      name: 'card_number'
-    }, {
-      data: 'first_name',
-      name: 'first_name'
-    }, {
-      data: 'last_name',
-      name: 'last_name'
-    }, {
-      data: 'member_status',
-      name: 'member_status'
-    }, {
-      data: 'card_status',
-      name: 'card_status'
-    }, {
-      data: 'action',
-      name: 'action',
-      orderable: false
-    }]
-  });
-});
+__webpack_require__(/*! datatables.net-bs4 */ "./node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"); // // ---- place for additional code for pages ----
+// //----- przeniesione do indywidualnych plików z widokami. 
+// $(document).ready(function(){
+//     //find table in members view
+//     let isTable=($('#members_table').attr('id'))
+//     console.log((isTable== undefined)?"tak":"nie")
+//     $('#members_table').DataTable({
+//         processing: true,
+//         serverSide: true,
+//         ajax:{
+//             //FIXME: zastanowić się nad tą ścieżką dlaczego blade jej nie zamienia na poprawną
+//             //chyba będzie najlepiej to zrobić przez pole ukryte i wyszukanie go już w JS. teraz nie jest route zamieniany na ścieżkę gdyż nie jest on częscią BLADE i jest parsowany przez normalny parser a nie parser związany z blade
+//             //url: "{{ route('members.index')}}",
+//             url:"/members"
+//         },
+//         columns:[
+//             {
+//                 data: 'card_number',
+//                 name: 'card_number'
+//             },{
+//                 data: 'first_name',
+//                 name: 'first_name'
+//             },{
+//                 data: 'last_name',
+//                 name: 'last_name'
+//             },{
+//                 data: 'member_status',
+//                 name: 'member_status'
+//             },{
+//                 data: 'card_status',
+//                 name: 'card_status'
+//             },{
+//                 data: 'action',
+//                 name: 'action',
+//                 orderable: false
+//             }
+//         ]
+//     });
+//     let modalView=$('#formModal');
+//     let modalTitle=modalView.find(".modal-title");
+//     let modalBody=modalView.find('.modal-body');
+//     $(document).on('click', '.info_member', function(){
+//         let id = $(this).attr('id');
+//         console.log("kliknieto Info")
+//         $.ajax({
+//             url: "/members/"+id,
+//             method: "GET",
+//             dataType: "json"
+//         }).done(resp=>{
+//             //console.log(resp);   
+//             buildModal(resp);         
+//         }).fail(err=>{
+//             console.log("błąd");
+//             console.log(err);
+//         });
+//     });
+//     //blok tworzący informacje do modalu
+//     buildModal=(resp)=>{
+//         let member=resp.member_data;
+//         let address=resp.member_address;
+//         let bodyHTML="";
+//         console.log(address)
+//         $(modalTitle).text("Dane " + member.first_name + " "+ member.last_name)
+//         //create modal body with data from ajax query to database
+//         bodyHTML ="<p> Imię i Nazwisko (pseudonim): <span>" + member.first_name + " " + member.last_name;
+//         (member.screen_name!="")? bodyHTML+= " (" + member.screen_name + ")</span></p>":bodyHTML+="</span></p>";
+//         bodyHTML+="<p>tel: <span>"+ member.tel1;
+//         (member.tel2!="" && member.tel2!= undefined)?(bodyHTML+=" / "+ member.tel2 + "</span></p>"):(bodyHTML+="</span></p>");
+//         bodyHTML+="<p>e-mail: <span>"+ member.email1;
+//         (member.email2!="" && member.email2!= undefined)?(bodyHTML+=" / "+ member.email2 + "</span></p>"):(bodyHTML+="</span></p>");
+//         bodyHTML+="<p> Adres: <span>"+ address.line1 +"; ";
+//         if(address.line2!="" && address.line2!= undefined){bodyHTML+= address.line2 + "; "}
+//         bodyHTML+=address.post_code + " " + address.city + "; "+ address.country + "</span></p>"
+//         modalBody.html(bodyHTML)
+//         modalView.modal('show')
+//     }
+// })
 
 /***/ }),
 

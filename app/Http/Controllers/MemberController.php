@@ -8,7 +8,7 @@ use App\StatusType;
 use App\PrintStatus;
 use App\MemberStatus;
 use App\CardStatus;
-
+use App\Address;
 class MemberController extends Controller
 {
 
@@ -57,10 +57,10 @@ class MemberController extends Controller
 
     public function create()
     {
-        $members_statusses=StatusType::all(); 
-        // $print_statuses=PrintStatus::all();
+        $members_statusses=StatusType::all();
         $print_statusses=PrintStatus::all();
-        return view('members.create', compact(['members_statusses', 'print_statusses']));
+        $addresses=Address::all();
+        return view('members.create', compact(['members_statusses', 'print_statusses', 'addresses']));
     }
 
     /**
@@ -82,7 +82,19 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        //
+        if(request()->ajax()){
+        $member_data=Member::findOrFail($id);
+        //TODO: do zmiany na rzeczywisty po dodaniu pełnego "create"
+        $member_address=(object)[
+            'line1'=> 'Dupa 30',
+            'city'=> 'Błonie',
+            'post_code'=>'30-611',
+            'country'=> 'XXXX',
+        ];
+        //TODO: dodać status członka i informację od kiedy. Linki do deklaracji, itp. Dodać informacje o Statusie karty 
+        return response()->json(['member_data' => $member_data, 'member_address'=>$member_address]);
+        }
+        
     }
 
     /**

@@ -20,7 +20,11 @@ $black: #040404;
     padding: 0;
     box-sizing: border-box;
 }
-
+#formModal{
+    span{
+        font-weight: bold;
+    }
+}
 //----- blok stylizacji akordeonu
         // .accordion {
         //     background-color: #eee;

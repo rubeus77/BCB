@@ -92,4 +92,6 @@
         </main>
     </div>
 </body>
+@yield('modal')
+@yield('js')
 </html>

@@ -27,7 +27,28 @@ class AddressController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        if(request()->ajax()){
+            $request->validate([
+                'line1'=>'required',
+                'line2'=>'nullable',
+                'city'=>'required',
+                'post_code'=>'required',
+                'country'=>'required'
+            ]);
+    
+            $address= new Address([
+                'line1'=>$request->get('line1'),
+                'line2'=>$request->get('line2', null),
+                'city'=>$request->get('city'),
+                'post_code'=>$request->get('post_code'),
+                'country'=>$request->get('country')
+            ]);
+            
+            $address->save();
+            $addresses=Address::all();
+            return response()->json(['success'=>"dodano adres", "addresses"=>$addresses]);
+        }
         $request->validate([
             'line1'=>'required',
             'line2'=>'nullable',
@@ -56,7 +77,10 @@ class AddressController extends Controller
      */
     public function show($id)
     {
-        //
+        if(request()->ajax()){
+            $address=Address::findOrFail($id);
+            return response()->json(['address'=>$address]);
+        }
     }
 
     /**
