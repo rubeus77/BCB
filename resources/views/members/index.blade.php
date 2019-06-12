@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content') <!-- content jest już w klasie "cointaner" i nie trzeba dodawać jej drugi raz -->
+  
   <!-- przycisk dodania członka - początek bloku -->
   <div class="d-flex justify-content-end">
       <a href="{{url('/members/create')}}" class="btn btn-primary">Dodaj członka</a>
@@ -8,19 +9,19 @@
   <!-- przycisk dodania członka - koniec bloku -->
 
   <!-- div oddzielający -->
-  <div class="w-100"><br/></div>
+  <div class="space-line"></div>
 
   <!-- tabela z listą członków -->
-  <div class="table-responsive">
+  <div class="table">
     <table class="table table-bordered table-striped" id="members_table">
       <thead>
-        <tr class="d-table-row">
+        <tr class="">
           <th class="col-1 align-middle">Nr <br />karty</th>
           <th class="col-2 align-middle">Imię</th>
           <th class="col-2 align-middle">Nazwisko</th>
           <th class="col-2 align-middle">Status członka</th>
           <th class="col-2 align-middle">Status karty</th>
-          <th class="col-2 align-middle">Inne działania</th>
+          <th class="col-1 align-middle">Inne działania</th>
         </tr>
       </thead>
     </table>
@@ -44,6 +45,22 @@
   </div>
 </div>
 
+<div id="editStatusModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class='modal-title'></h4> 
+        <button type="button" class="close" data-dismiss="modal">&times;</button> 
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="changeBtn">Zmień</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">Anuluj</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 @section('js')
 <script>
@@ -51,8 +68,9 @@
 $(document).ready(function(){
 
     //find table in members view
-    let isTable=($('#members_table').attr('id'))
-    console.log((isTable== undefined)?"tak":"nie")
+    let modalView=$('#formModal');
+    let modalTitle=modalView.find(".modal-title");
+    let modalBody=modalView.find('.modal-body');
 
     $('#members_table').DataTable({
         
@@ -88,9 +106,7 @@ $(document).ready(function(){
             }
         ]
     });
-    let modalView=$('#formModal');
-    let modalTitle=modalView.find(".modal-title");
-    let modalBody=modalView.find('.modal-body');
+    
     $(document).on('click', '.info_member', function(){
         let id = $(this).attr('id');
         console.log("kliknieto Info")
@@ -109,7 +125,8 @@ $(document).ready(function(){
         });
     });
 
-    //blok tworzący informacje do modalu
+    //blok tworzący informacje do modalu i informacją o członku
+    //TODO: do dokończenia po zmianie bazy danych
     buildModal=(resp)=>{
         let member=resp.member_data;
         let address=resp.member_address;
@@ -133,6 +150,88 @@ $(document).ready(function(){
         modalBody.html(bodyHTML)
         modalView.modal('show')
     }
+    //zmiana statusu karty
+    $(document).on('click', '.edit_member_status', function(){
+      let editModal=$('#editStatusModal');
+      let title="Edytuj Status członka";
+      let select=$("<select>").attr("name","selectChangeStatus");
+      let memberId=$(this).attr('id');
+      $('#changeBtn').attr("action", "status_type").attr("memberId", memberId);
+      console.log(memberId);
+      $.ajax({
+        url: "/statusType",
+        method: "GET",
+      }).done(resp=>{
+        select.append(resp.types.map(elem=>$("<option>").val(elem.id).text(elem.name)))
+      }).fail(err=>{
+        console.log("Nie udane pobranie danych")
+      });
+      select.addClass("form-control");
+      editModal.find(".modal-title h4").text(title);
+      editModal.find(".modal-body").html(select);
+      editModal.modal('show');
+    });
+
+    $(document).on('click', '.edit_card_status', function(){
+      let editModal=$('#editStatusModal');
+      let title="Zmień status karty członkowskiej";
+      let select=$("<select>").attr("name","selectChangeStatus");
+      let memberId=$(this).attr('id');
+      $('#changeBtn').attr("action", "print_status").attr("memberId", memberId);
+      console.log(memberId);
+      $.ajax({
+        url: "/printStatus",
+        method: "GET",
+      }).done(resp=>{
+        select.append(resp.types.map(elem=>$("<option>").val(elem.id).text(elem.name)))
+      }).fail(err=>{
+        console.log("Nie udane pobranie danych")
+      });
+      select.addClass("form-control");
+      editModal.find(".modal-title h4").text(title);
+      editModal.find(".modal-body").html(select);
+      editModal.modal('show');
+    });
+
+
+
+    
+    $(document).on("click", "#changeBtn", function(){
+      let memberId=$(this).attr("memberId");
+      let URL="/members"+memberId;
+      let action=$(this).attr("action")
+      let changedValue=$('select[name="selectChangeStatus"').val();
+      let dataToSend={};
+      if (action==="print_status"){
+        
+        dataToSend={
+          action: "print_status",
+          id: memberId,
+          newValue: changedValue
+        }
+      }else if(action==="status_type"){
+        
+        dataToSend={
+            action: "status_type",
+            id: memberId,
+            newValue: changedValue
+          }
+      }
+      $.ajax({
+        url: URL,
+        method: "PATCH",
+        dataType: "json",
+        data: dataToSend
+      }).done(resp=>{
+        console.log("dane zmienione")
+      }).fail(err=>{
+        console.log("nie udane przesłanie")
+      })
+      
+      $("#editStatusModal").modal('hide');
+      $('#members_table').DataTable().ajax.reload();
+    });
+  
 })
 </script>
 @endsection

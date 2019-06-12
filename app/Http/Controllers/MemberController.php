@@ -14,7 +14,6 @@ class MemberController extends Controller
 
     public function index()
     {
-      //TODO: dokończyć CardStatus po uzupełnieniu tabeli CardStatus
         if (request()->ajax()){
             
             $card_status="blada";
@@ -25,26 +24,24 @@ class MemberController extends Controller
                     $member_status_index=(MemberStatus::where('id', $data->id)->get())[0]->status_type;
                     $member_ststus_type=(StatusType::where('id', $member_status_index)->get())[0]->name;
 
-                    return $member_ststus_type;
+                    return $member_ststus_type.'&nbsp;&nbsp; <i class="far fa-edit edit_member_status float-right" name="edit_member_status"  id="'.$data->id.'"></i>';
                 })
                 ->addColumn('card_status', function($data){
                     $card_status = CardStatus::where('id', $data->id)->get();
                     $card_status.="uzupełnić CardStatus";
                     
-                    return $card_status;
+                    return $card_status.'&nbsp;&nbsp;<i class="far fa-edit edit_card_status float-right" name="edit_card_status" id="'.$data->id.'"></i>';
                 })
                 ->addColumn('action', function($data){
-                    $button='<i class="fas fa-user edit_member_status" name="edit_member_status"  id="'.$data->id.'"></i>';
-                    $button.='&nbsp;';
-                    $button.='<i class="far fa-credit-card edit_card_status" name="edit_card_status" id="'.$data->id.'"></i>';
-                    $button.='&nbsp;&nbsp;';
+                    $button ='<div class="float-left">';
                     $button.='<i class="fas fa-user-edit edit_member" name="edit_member" id="'.$data->id.'"></i>';
                     $button.='&nbsp;';
                     $button.='<i class="far fa-id-card info_member" name="info_member" id="'.$data->id.'"></i>';
-                    $button.='&nbsp;&nbsp;';
+                    $button.='</div><div class="float-right">';
                     $button.='<i class="fas fa-search-dollar payment_member" name="payment_member" id="'.$data->id.'"></i>';
                     $button.='&nbsp;';
                     $button.='<i class="fas fa-hand-holding-usd payment_member_add" name="payment_member_add" id="'.$data->id.'"></i>';
+                    $button.='</div>';
                     
                     return $button;
                 })
@@ -59,6 +56,7 @@ class MemberController extends Controller
     {
         $members_statusses=StatusType::all();
         $print_statusses=PrintStatus::all();
+        //TODO: będzie do usunięcia po zmianie bazy danych i przypisaniu jednak adresu do użytkownika
         $addresses=Address::all();
         return view('members.create', compact(['members_statusses', 'print_statusses', 'addresses']));
     }
@@ -84,7 +82,7 @@ class MemberController extends Controller
     {
         if(request()->ajax()){
         $member_data=Member::findOrFail($id);
-        //TODO: do zmiany na rzeczywisty po dodaniu pełnego "create"
+        //TODO: do zmiany na rzeczywisty po dodaniu pełnego "create" Będzie wczytywanie zgodne z nową bazą  danych
         $member_address=(object)[
             'line1'=> 'Dupa 30',
             'city'=> 'Błonie',
@@ -117,7 +115,11 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(request()->ajax()){
+            if($request->"action"==="print_status"){
+                Member::whereId($request->'id')->update()
+            }
+        }
     }
 
     /**

@@ -178,7 +178,7 @@
                     </div>
                 </div>
             </div>
-            <input type="submit" class="btn btn-primary" value="Dodaj członka" /> 
+            <input type="submit" class="btn btn-primary float-right" value="Dodaj członka" /> 
         </form>
     </div>
 @endsection

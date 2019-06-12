@@ -14,6 +14,10 @@ class PrintStatusController extends Controller
      */
     public function index()
     {
+        if(request()->ajax()){
+            $print_statusses=PrintStatus::all();
+            return response()->json(["types"=>$print_statusses]);
+        }
         $print_statusses=PrintStatus::all();
        return view('printStatus.index', compact('print_statusses'));
     }

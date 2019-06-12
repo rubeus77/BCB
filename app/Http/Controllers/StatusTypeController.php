@@ -13,7 +13,11 @@ class StatusTypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        if(request()->ajax()){
+            $status_types=StatusType::all();
+            return response()->json(["types"=>$status_types]);
+        }
         $status_types=StatusType::all();
         return view('statusType.index', compact('status_types'));
     }
