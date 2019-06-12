@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="accordion" id="accordionMembers">
+        <!-- TODO: Zmiana bazy danych Adres wciągnięty do danych Członka -->
         <!-- TODO: Uzupełnić przesył formularza w method i action -->
         <form >
             <!-- blok of personal data inputs -->
@@ -67,28 +68,28 @@
             </div>
             <div id="addressesData" class="collapse" aria-labelledby="headingAddressesData" data-parent="#accordionMembers">
                 <div class="card-body">
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <label for="address">Adres</label>
-                            <select id="address" class="form-control">
-                                <!-- TODO: do zrobienia raczej przez JS niż przez BLADE. Problem z odświeżaniem po dodaniu nowego adresu -->
-                                @foreach($addresses as $address)
-                                    <option value="{{ $address->id }}">{{$address->city}}; {{$address->line1}}; {{$address->line2}}</option>
-                                @endforeach  
-                            </select>
-                        </div>
-                        <div class="form-group col-2">
-                            <label for="addNewAddress">&nbsp;</label>
-                            <button type="button" class="btn btn-primary" id="addNewAddress">Dodaj nowy adres</button>
-                        </div>
+                    <div class="form-group col">
+                        <label for="line1">Linia 1</label>
+                        <input type="text" class="form-control" id="line1" name="line1" placeholder="" />
                     </div>
                     <div class="form-group col">
-                        <label for=choosenAddress>Wybrany adres to:</label>
-                        <p class="text bg-success p-3" id="choosenAddress"></p>
+                        <label for="line2">Linia 2</label>
+                        <input type="text" class="form-control" id="line2" name="line2" placeholder="" />
                     </div>
-                   
-                    <p>TODO: Wprowadzić AJAX</p>
-                    <p>TODO: Wprowadzić pola z wypisywaniem wartości w zależności od selektora</p>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="city">Miasto</label>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="" />
+                        </div>
+                        <div class="form-group col-2">
+                            <label for="post_code">Kod pocztowy</label>
+                            <input type="text" class="form-control" id="post_code" name="post_code" placeholder="" />
+                        </div>
+                        <div class="form-group col-3">
+                            <label for="country">Państwo</label>
+                            <input type="text" class="form-control" id="country" name="country" placeholder="" />
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- blok of Member Status -->
@@ -181,78 +182,4 @@
         </form>
     </div>
 @endsection
-@section('modal')
-<div id="formModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class='modal-title'></h4> 
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <div class="form row">
-            <div class="form-group col">
-                <label for="line1">Linia 1</label>
-                <input type="text" class="form-control" id="line1" name="line1" placeholder="" />
-            </div>
-            <div class="form-group col">
-                <label for="line2">Linia 1</label>
-                <input type="text" class="form-control" id="line2" name="line2" placeholder="" />
-            </div>
-        </div>
-        <div class="form row">
-            <div class="form-group col">
-                <label for="city">Miasto</label>
-                <input type="text" class="form-control" id="city" name="city" placeholder="" />
-            </div>
-            <div class="form-group col">
-                <label for="post_code">Kod pocztowy</label>
-                <input type="text" class="form-control" id="post_code" name="post_code" placeholder="" />
-            </div>
-            <div class="form-group col">
-                <label for="country">Państwo</label>
-                <input type="text" class="form-control" id="country" name="country" placeholder="" />
-            </div>
-        </div>
-        
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Dodaj</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Zamknij</button>
-      </div>
-    </div>
-  </div>
-</div>
-@endsection
-@section('js')
-<script>
-$(document).ready(function(){
-    console.log("załadowano skrypt")
 
-    //TODO: dodać wczytywanie wszystkich adresów po załadowaniu się strony i zrobieniu z nich selekta.
-    let addressChoose=$("#address");
-    let choosenAddress=$("#choosenAddress")
-    addressChoose.on('change', function(){
-        $.ajax({
-            url: '/address/'+ addressChoose.val(),
-            method: "GET",
-            dataType: "json"
-        }).done(resp=>{
-            console.log("udane zapytanie o adres");
-            console.log(resp);
-            let adres=resp.address;
-            console.log(adres)
-            choosenAddress.text(addressChoose.val() + " " + adres.city +"; "+ adres.post_code + "; "+ adres.line1 + "; "+ adres.line2 +"; "+ adres.country);
-            choosenAddress.attr("addressId", adres.id)
-        }).fail(err=>{
-            console.log("nie udane zapytanie o adres")
-        });
-    });
-
-    let addAddressBtn=$("#addNewAddress");
-    addAddressBtn.on("click", function(){
-        $("#formModal").modal('show')
-    })
-})
-</script>
-@endsection
