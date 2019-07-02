@@ -16,7 +16,7 @@
     <!-- formularz do wypełnienia -->
         <h2>Podaj nazwę nowego typu Statusu członka</h2>
         <form method="post" action="{{ route('statusType.store') }}">
-            @csrf
+            @csrf <!-- {{ csrf_field() }} -->
             <input type="text" class="form-control" name="status_type" id="status_type" />
             <button type="submit" class="btn btn-primary">Dodaj</button>
         </form>

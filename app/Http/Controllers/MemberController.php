@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Member;
 use App\StatusType;
@@ -21,14 +22,14 @@ class MemberController extends Controller
                 ->addColumn('member_status',function($data){
                     //get() zwraca tablicę z obiektami. obiekty zawierają wszystkie dane w postaci nazwa_kolumny: wartość
                     //można to zastąpić get('nazwa_kolumny') wtedy zwraca tablicę z obiektem z jednym kluczem i wartością. Kluczem jest zawsze nazwa kolumny
-                    $member_status_index=(MemberStatus::where('id', $data->id)->get())[0]->status_type;
-                    $member_ststus_type=(StatusType::where('id', $member_status_index)->get())[0]->name;
-
+                    //$member_status_index=(MemberStatus::where('id', $data->id)->get())[0]->status_type;
+                    //$member_ststus_type=(StatusType::where('id', $member_status_index)->get())[0]->name;
+$member_ststus_type="do zmiany";
                     return $member_ststus_type.'&nbsp;&nbsp; <i class="far fa-edit edit_member_status float-right" name="edit_member_status"  id="'.$data->id.'"></i>';
                 })
                 ->addColumn('card_status', function($data){
-                    $card_status = CardStatus::where('id', $data->id)->get();
-                    $card_status.="uzupełnić CardStatus";
+                   // $card_status = CardStatus::where('id', $data->id)->get();
+                    $card_status="uzupełnić CardStatus";
                     
                     return $card_status.'&nbsp;&nbsp;<i class="far fa-edit edit_card_status float-right" name="edit_card_status" id="'.$data->id.'"></i>';
                 })
@@ -56,9 +57,13 @@ class MemberController extends Controller
     {
         $members_statusses=StatusType::all();
         $print_statusses=PrintStatus::all();
-        //TODO: będzie do usunięcia po zmianie bazy danych i przypisaniu jednak adresu do użytkownika
-        $addresses=Address::all();
-        return view('members.create', compact(['members_statusses', 'print_statusses', 'addresses']));
+
+        $last_card_number=Member::all();
+        $last_card_number++;
+        
+        //$addresses=Address::all();
+        //return view('members.create', compact(['members_statusses', 'print_statusses', 'addresses']));
+        return view('members.create', compact(['members_statusses', 'print_statusses', 'last_card_number']));
     }
 
     /**
@@ -69,7 +74,120 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      
+        if($request->get('check_second_address')){
+            $request->validate([
+                'first_name' => 'required',
+                'last_name'     =>  'required',
+                'screen_name'   =>  'nullable',
+                'birth_date'    =>  'required',
+                'tel1'          =>  'required',
+                'tel2'          =>  'nullable',
+                'email1'        =>  'required',
+                'email2'        =>  'nullable',
+                'line1'         =>  'required',
+                'line2'         =>  'nullable',
+                'post_code'     =>  'required',
+                'city'          =>  'required',
+                'country'       =>  'required',
+                'line1_second'  =>  'required',
+                'line2_second'  =>  'nullable',
+                'city_second'   =>  'required',
+                'post_code_second'  =>  'required',
+                'country_second'    =>  'required',
+                'status_type'   =>  'required',
+                'enter_date'    =>  'required',
+                'enter_scan_URL'    =>  'required',
+                'accept_scan_URL'   =>  'nullable',
+                'leave_date'    =>  'nullable',
+                'leave_scan_URL'    =>  'nullable',
+                'leave_reason'  =>  'nullable',
+                'card_number'   =>  'required',
+                'name_on_card'  =>  'required',
+                'card_status'   =>  'required'   
+            ]);
+            $address1= new Address([
+                'line1'=>$request->get('line1'),
+                'line2'=>$request->get('line2', null),
+                'city'=>$request->get('city'),
+                'post_code'=>$request->get('post_code'),
+                'country'=>$request->get('country')
+            ]);
+            $address1->save();                      
+            $address2= new Address([
+                'line1'=>$request->get('line1_second'),
+                'line2'=>$request->get('line2_second', null),
+                'city'=>$request->get('city_second'),
+                'post_code'=>$request->get('post_code_second'),
+                'country'=>$request->get('country_second')
+            ]);
+            $address2->save();
+            $address1Id=$address1->id;
+            $address2Id=$address2->id;
+        }else{
+            $request->validate([
+                'first_name' => 'required',
+                'last_name'     =>  'required',
+                'screen_name'   =>  'nullable',
+                'birth_date'    =>  'required',
+                'tel1'          =>  'required',
+                'tel2'          =>  'nullable',
+                'email1'        =>  'required',
+                'email2'        =>  'nullable',
+                'line1'         =>  'required',
+                'line2'         =>  'nullable',
+                'post_code'     =>  'required',
+                'city'          =>  'required',
+                'country'       =>  'required',
+                'line1_second'  =>  'nullable',
+                'line2_second'  =>  'nullable',
+                'city_second'   =>  'nullable',
+                'post_code_second'  =>  'nullable',
+                'country_second'    =>  'nullable',
+                'status_type'   =>  'required',
+                'enter_date'    =>  'required',
+                'enter_scan_URL'    =>  'required',
+                'accept_scan_URL'   =>  'nullable',
+                'leave_date'    =>  'nullable',
+                'leave_scan_URL'    =>  'nullable',
+                'leave_reason'  =>  'nullable',
+                'card_number'   =>  'required',
+                'name_on_card'  =>  'required',
+                'card_status'   =>  'required'   
+            ]);    
+            $address1= new Address([
+                'line1'=>$request->get('line1'),
+                'line2'=>$request->get('line2', null),
+                'city'=>$request->get('city'),
+                'post_code'=>$request->get('post_code'),
+                'country'=>$request->get('country')
+            ]);
+            $address1->save();  
+            $address1Id=$address1->id;
+            $address2Id=$address1->id;
+                //TODO: zrobić wprowadzenie karty i jej statusy oraz wprowadzić status członka
+            
+            // $last_card_number=DB::table('members')->orderedBy('id', 'DESC')->first();
+            // $last_card_number++;
+            $member_status= new MemberStatus([
+                'status_id'=>$request->get('status_type'),
+                'start_date'=>$request->get('enter_date'),
+                
+            ]);
+            
+
+                // TODO: dokończyć wrowadzanie członka
+
+            $member=new Member([
+                'first_name'=>$request->get('first_name'),
+                'last_name'=>$request->get('last_name'),
+                'birth_date'=>$request->get('birth_date'),
+                
+            ]);
+        }
+        
+
+        return view('members.index');
     }
 
     /**
@@ -115,11 +233,11 @@ class MemberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(request()->ajax()){
-            if($request->"action"==="print_status"){
-                Member::whereId($request->'id')->update()
-            }
-        }
+        // if(request()->ajax()){
+        //     if($request->"action"==="print_status"){
+        //         Member::whereId($request->'id')->update();
+        //     }
+        // }
     }
 
     /**
