@@ -170,14 +170,26 @@ $member_ststus_type="do zmiany";
             // $last_card_number=DB::table('members')->orderedBy('id', 'DESC')->first();
             // $last_card_number++;
             $member_status= new MemberStatus([
-                'status_id'=>$request->get('status_type'),
-                'start_date'=>$request->get('enter_date'),
-                
+                'status_type'=>$request->get('status_type'),
+                'accession_date'=>$request->get('enter_date'),
+                'declaration_scan_URL'=>$request->get('enter_scan_URL'),
+                'accept_scan_URL'=>$request->get('adding_scan_URL'),
+                'leave_date'=>$request->get('leave_date'),
+                'leave_reason_scan_URL'=>$request->get('leave_scan_URL')
             ]);
+            $member_status->save();
+            $member_status_Id=$member_status->id;
+
+                
+            $card_status=new CardStatus([
+                'first_name_on_card'=>$request->get('card_number'),
+                'last_name_on_card'=>$request->get('name_on_card'),
+                'print_status'=>$request->get('card_status')
+            ]);
+            $card_status->save();
+            $card_status_Id=$card_status->id;
             
-
                 // TODO: dokończyć wrowadzanie członka
-
             $member=new Member([
                 'first_name'=>$request->get('first_name'),
                 'last_name'=>$request->get('last_name'),
